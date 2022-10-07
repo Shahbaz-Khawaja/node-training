@@ -6,13 +6,14 @@ const {
   deleteUserController,
   updateUserController,
 } = require('../controllers/users');
-const { userValidator } = require('../middleware/validators/users');
+const { userSchema } = require('../schemas/users');
+const inputFormValidator = require('../middleware/inputFormValidator');
 const router = express.Router();
 
-router.post('/', userValidator, postUserController);
+router.post('/', inputFormValidator(userSchema), postUserController);
 router.get('/', getAllUsersController);
 router.get('/:userId', getSingleUserController);
 router.delete('/:userId', deleteUserController);
-router.put('/:userId', userValidator, updateUserController);
+router.patch('/:userId', inputFormValidator(userSchema), updateUserController);
 
 module.exports = router;

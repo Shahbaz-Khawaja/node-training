@@ -1,22 +1,34 @@
 const db = require('../models');
 
 const Todo = db.Todo;
-const User = db.User;
-const getAllTodos = (userId) => {
+
+const getAllTodosByUserId = (userId) => {
   return Todo.findAll({
     where: {
       user_id: userId,
     },
-    include: {
-      User,
-    },
   });
 };
 
-const postBulkOfTodos = (payload) => {
-  return Todo.bulkCreate(payload);
+const postSingleTodoByUserId = (userId, payload) => {
+  return Todo.create({ ...payload, user_id: userId });
 };
+
+const getSingleTodoByTodoId = (userId, todoId) => {
+  return Todo.findOne({
+    where: { user_id: userId, todo_id: todoId },
+  });
+};
+
+const deleteSingleTodoByTodoId = (userId, todoId) => {
+  return Todo.destroy({
+    where: { user_id: userId, todo_id: todoId },
+  });
+};
+
 module.exports = {
-  getAllTodos,
-  postBulkOfTodos,
+  getAllTodosByUserId,
+  postSingleTodoByUserId,
+  getSingleTodoByTodoId,
+  deleteSingleTodoByTodoId,
 };

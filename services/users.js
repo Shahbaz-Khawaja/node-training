@@ -22,16 +22,9 @@ const deleteUser = (userId) => {
   });
 };
 
-const updateUser = (userId, payload) => {
-  return User.update(payload, {
-    where: { user_id: userId },
-  });
-};
-
 module.exports = {
   getAllUsers,
   postUser,
   deleteUser,
   getSingleUser,
-  updateUser,
 };

@@ -6,6 +6,4 @@ const userSchema = object().shape({
   age: number().label('Age').required(),
 });
 
-module.exports = {
-  userSchema,
-};
+module.exports = { userSchema };

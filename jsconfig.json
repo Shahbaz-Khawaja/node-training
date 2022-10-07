@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2016",
+        "rootDir": "./",
+        "baseUrl": "."
+    },
+    "paths": {
+        "/*": ["./*"]
+    },
+    "include": ["config", "controllers", "middleware", "middleware", "migrations", "routes", "schemas", "seeders", "services", "utils", "app.js" ],
+    "exclude": ["node_modules", ".idea", ".env", "package-lock.json", "package.json"]
+}
