@@ -3,7 +3,6 @@ const {
   getAllUsers,
   getSingleUser,
   deleteUser,
-  updateUser,
 } = require('../services/users');
 
 const postUserController = async (req, res) => {
@@ -39,13 +38,11 @@ const getAllUsersController = async (req, res) => {
 const deleteUserController = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await getSingleUser(userId);
-    if (!user) return res.status(400).json({ msg: 'User does not Exist' });
     const response = await deleteUser(userId);
     if (!response) return res.status(400).json({ msg: 'User does not Exist' });
     res.status(201).json({
       msg: 'success',
-      data: user,
+      data: response,
     });
   } catch (error) {
     res.status(500).json({
@@ -75,11 +72,13 @@ const getSingleUserController = async (req, res) => {
 const updateUserController = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const response = await updateUser(userId, req.body);
-    if (!response) return res.status(400).json({ msg: 'User does not Exist' });
+    const existingUser = await getSingleUser(userId);
+    if (!existingUser)
+      return res.status(400).json({ msg: 'User does not Exist' });
+    existingUser.update({ ...req.body });
     res.status(201).json({
       msg: 'success',
-      data: req.body,
+      data: existingUser,
     });
   } catch (error) {
     res.status(500).json({

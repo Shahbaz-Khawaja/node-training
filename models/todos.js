@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       todo: {
         type: DataTypes.STRING,
       },
-      id: {
+      todo_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
